@@ -21,8 +21,20 @@ class ViewController: UIViewController {
             } else {
                 if let content = data {
                     do{
-                        let jsonResult = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers)
-                        print(jsonResult)
+                        let jsonResult = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
+                       
+                        print(jsonResult!["name"])
+                        
+                        if let discription = jsonResult!["weather"]as?NSArray
+                        {
+                            if let discription2 = discription[0]as?NSDictionary{
+                                if let discription3 = discription2["description"]as?String{
+                                    print(discription3)
+                                }
+                            }
+                        }
+                        
+                        
                     } catch {
                         print("JSON Processing Failed")
                     }
